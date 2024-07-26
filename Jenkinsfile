@@ -6,10 +6,13 @@ pipeline {
         DOCKER_CREDENTIALS_ID = credentials('293584b5-3427-4c7f-8305-657fca791dad')
     }
     stages {
-        
-        stage('Initialize'){
-            def dockerHome = tool 'Docker Latest'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        stage('Initialize') {
+            steps {
+                script {
+                    def dockerHome = tool 'Docker Latest'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                }
+            }
         }
         stage('Build Docker Image') {
             steps {
