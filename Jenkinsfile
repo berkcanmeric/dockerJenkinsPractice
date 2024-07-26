@@ -6,12 +6,6 @@ pipeline {
         DOCKER_CREDENTIALS_ID = credentials('293584b5-3427-4c7f-8305-657fca791dad')
     }
     stages {
-        stage('Checkout') {
-            steps {
-                // Pull the latest code from the GitHub repository
-                git 'https://github.com/berkcanmeric/dockerJenkinsPractice.git'
-            }
-        }
         stage('Build Docker Image') {
             steps {
                 script {
