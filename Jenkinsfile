@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile in the repository
-                    docker.build(DOCKER_IMAGE)
+                    sh 'docker build -t ${DOCKER_IMAGE} .'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Run tests inside the Docker container
-                    docker.image(DOCKER_IMAGE).inside {
+                    docker.image(DOCKER_IMAGE).inside('-v /var/run/docker.sock:/var/run/docker.sock') {
                         sh 'npm test'
                     }
                 } 
